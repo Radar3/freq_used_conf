@@ -1,0 +1,114 @@
+zmodem catch
+# Set default encoding using utf8
+defutf8 on
+
+# 解决中文乱码,这个要按需配置
+defencoding utf8
+encoding utf8 utf8
+
+#兼容shell 使得.bashrc .profile /etc/profile等里面的别名等设置生效
+shell -$SHELL
+shelltitle "$|bash"
+
+#set the startup message
+startup_message off
+
+term linux
+#term screen-256color
+attrcolor b ".I"    # 允许加粗色彩--由于某些原因是必须的
+#attrcolor u "-u B"
+defbce on    # 使用当前背景色来显示删除的字符]]'
+
+autodetach on
+
+# 解决无法滚动
+termcapinfo xterm|xterms|xs ti@:te=\E[2J
+
+termcapinfo rxvt* 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # 告诉screen如何设置颜色。AB 指背景，AF 指前景
+terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm]]'
+
+# 屏幕缓冲区行数
+defscrollback 100000
+
+backtick 1 5 5 true
+hardstatus string "screen (%n: %t)"
+
+# 下标签设置
+hardstatus on
+# hardstatus alwayslastline
+# caption always "%{= kw}%-w%{= kG}%{+b}[%n %t]%{-b}%{= kw}%+w %=%d %M %0c %{g}%H%{-}"
+# caption always '%{= kG}[ %Y/%m/%d %{G}%c:%s %{g}][%= %{= kw}%?%-Lw%?%{Y}%n*%f%t %{K}%?%+Lw%?%= %{kG}][ %{C}(F8)Screen (F9)Title (F10)Detach (F11)Prev (F12)Next %{kg}]'
+# caption always '%{= kG}[ %{G}%c:%s %{g}][%= %{= kw}%?%-Lw%?%{Y}%n*%f%t %{K}%?%+Lw%?%= %{kG}][ %{C}(F8)Screen (F9)Title (F10)Detach (F11)Prev (F12)Next %{kg}][%{kG} %l %Y/%m/%d %{kG}]'
+# caption always '%{= kg}[ %{G}%c:%s %{g}][%= %{= kw}%?%-Lw%?%{Y}%n*%f%t %{K}%?%+Lw%?%= %{g}][%{kG} %D %Y/%m/%d %{g}]'
+# caption always "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %{..Y} %m/%d %C%a"
+#caption always '%{= kG}[ %{G}%H %{g} ][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W} %c %{g}]'
+
+#关闭闪屏
+vbell off
+
+#set the Global Key
+
+# set Alt + space as an escape key in GNU Screen
+# reset escape key to the default
+# escape ^Aa
+# auxiliary register
+register S ^A
+# Alt + space produces ^A and acts as an escape key
+bindkey "^[a" process S
+
+#Keboard binding
+# bind Alt+j to move to previous window
+bindkey ^[j next
+# bind Alt+k to move to next window
+bindkey ^[k prev
+
+# 当前路径下创建新窗口
+# bind ^x
+# bind ^x stuff “screen -X chdir \$PWD;screen^M”
+
+# 从窗口 1 开始
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10
+screen 1
+
+# bind Alt`~= to screen0~12
+bindkey "^[`" select 0
+bindkey "^[1" select 1
+bindkey "^[2" select 2
+bindkey "^[3" select 3
+bindkey "^[4" select 4
+bindkey "^[5" select 5
+bindkey "^[6" select 6
+bindkey "^[7" select 7
+bindkey "^[8" select 8
+bindkey "^[9" select 9
+bindkey "^[0" select 10
+bindkey "^[-" select 11
+bindkey "^[=" select 12
+#
+#bindkey -k k4 quit
+# bind F5 to create a new screen
+#bindkey -k k5 screen
+# bind F6 to detach screen session (to background)
+#bindkey -k k6 detach
+# bind F7 to kill current screen window
+#bindkey -k k7 kill
+# bind F8 to rename current screen window
+#bindkey -k k8 title
+
+### w to show the window list
+bind w windowlist -b
+bind ^w windowlist -b
+
+###initial apps to run
+#screen -t compile 0
+#screen -t build   1
+#screen -t package 2
+#screen -t tmp     3
+#screen -t test    4
+
+# 消除残余的编辑文本
+altscreen on
+
