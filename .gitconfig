@@ -1,7 +1,13 @@
 [credential]
-	helper = cache --timeout 31536000
+	helper = cache --timeout 315360000
 [user]
 	email = user@localhost
 	name = myname
 [push]
 	default = simple
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
