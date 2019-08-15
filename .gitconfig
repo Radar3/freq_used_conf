@@ -13,3 +13,8 @@
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [core]
     editor = vim
+[color]
+    status = auto
+    diff = auto
+    branch = auto
+    interactive = auto
