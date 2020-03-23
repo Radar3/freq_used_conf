@@ -11,6 +11,7 @@
 	st = status
 	br = branch
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	lol = log --abbrev-commit --pretty=oneline --graph --decorate
 [core]
     editor = vim
 [color]
